@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\ShowArticles;
+use App\Http\Livewire\BlogComponent;
+use App\Http\Livewire\FullArticleComponent;
+use App\Http\Livewire\ShowArticle;
+use App\Http\Livewire\ShowBlog;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', ShowArticles::class)->name('home');
+Route::get('/', BlogComponent::class)->name('home');
+Route::get('/articles/{articleId}', FullArticleComponent::class)->name('article');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

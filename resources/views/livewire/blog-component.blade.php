@@ -5,7 +5,7 @@
 
             <div class="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
                 @forelse($articles as $article)
-                    <livewire:article-component :article="$article"/>
+                    <livewire:summarized-article-component :article="$article"/>
                 @empty
                     <p>No articles yet, comeback later!</p>
                 @endforelse
