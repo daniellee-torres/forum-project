@@ -29,6 +29,7 @@
         </div>
     </div>
 
+    <livewire:comments-component :comments="$article->comments"/>
 
 </article>
 

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,7 +30,7 @@ class BlogTest extends testcase
     /**
      * @test
      */
-    public function a_user_can_see_an_individual_article()
+    public function a_user_can_see_an_individual_article_by_clicking_on_article_title()
     {
         // Given I have an article
         $user = User::factory()->create();
@@ -40,6 +41,26 @@ class BlogTest extends testcase
             ->call('showFullArticle', $article->id)
             ->assertRedirect("/articles/{$article->id}");
     }
+
+    /**
+     * @test
+     */
+    public function a_user_can_read_comments_associated_to_an_article()
+    {
+        $article = Article::factory()->create();
+
+        //Given we have an article with comments
+        $comment = Comment::factory()->create([
+            'article_id' => $article->id
+        ]);
+        //When we visit that article's page
+        $response = $this->get(route('article', ['articleId' => $article->id]));
+        //Then we should see the replies
+        $response->assertSeeLivewire('comments-component')
+        ->assertSee($comment->body);
+    }
+
+
 
 
 
