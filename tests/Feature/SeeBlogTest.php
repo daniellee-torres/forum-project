@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class BlogTest extends testcase
+class SeeBlogTest extends testcase
 {
     use DatabaseMigrations;
     /**
@@ -49,16 +49,17 @@ class BlogTest extends testcase
     {
         $article = Article::factory()->create();
 
-        //Given we have an article with comments
+        // Given we have an article with comments
         $comment = Comment::factory()->create([
             'article_id' => $article->id
         ]);
-        //When we visit that article's page
-        $response = $this->get(route('article', ['articleId' => $article->id]));
-        //Then we should see the replies
-        $response->assertSeeLivewire('comments-component')
-        ->assertSee($comment->body);
+        // When a user visits that article's page, Then they will see the comments for that article
+        $response = $this->get(route('article', ['articleId' => $article->id]))
+            ->assertSeeLivewire('full-article-component', ['article' => $article]);
+
+        $response->assertSee($comment->body);
     }
+
 
 
 

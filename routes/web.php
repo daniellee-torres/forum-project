@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\BlogComponent;
+use App\Http\Livewire\CommentFormComponent;
 use App\Http\Livewire\FullArticleComponent;
 use App\Http\Livewire\ShowArticle;
 use App\Http\Livewire\ShowBlog;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', BlogComponent::class)->name('home');
 Route::get('/articles/{articleId}', FullArticleComponent::class)->name('article');
+Route::post('articles/{articleId}/comment', CommentFormComponent::class)->name('comment');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

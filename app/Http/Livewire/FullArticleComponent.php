@@ -16,6 +16,6 @@ class FullArticleComponent extends Component
     }
     public function render()
     {
-        return view('livewire.full-article-component')->with('comments', Article::with('comments')->get());
+        return view('livewire.full-article-component')->with('comments', Article::with('user', 'comments')->get());
     }
 }
