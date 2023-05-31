@@ -7,16 +7,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+use Carbon\Carbon;
+
 class UserArticlesComponent extends Component
 {
-
     public Collection $articles;
     public bool $published = true;
-
-    public function __construct()
-    {
-        $this->articles = new Collection();
-    }
 
     public function mount()
     {
@@ -28,6 +24,7 @@ class UserArticlesComponent extends Component
     {
         return view('livewire.user-articles-component');
     }
+
     public function reloadComponent(string $published)
     {
         $this->published = $published === '1';
@@ -36,14 +33,22 @@ class UserArticlesComponent extends Component
 
     private function loadArticles()
     {
-        $this->articles = Article::where('user_id', auth()->user()->id)
-            ->where('published', $this->published)
-            ->get();
+        $query = Article::where('user_id', auth()->user()->id);
+
+        if ($this->published) {
+            // Only load articles with publication date in the past or today
+            $query->whereDate('publication_date', '<=', Carbon::today());
+        } else {
+            // Only load articles with publication date in the future
+            $query->whereDate('publication_date', '>', Carbon::today());
+        }
+
+        $this->articles = $query->get();
     }
 
     public function add_article()
     {
         return redirect()->route('createArticle');
     }
-
 }
+

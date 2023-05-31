@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
@@ -18,13 +19,14 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function(){
+            'user_id' => function () {
                 return User::factory()->create()->id;
             },
             'title' => fake()->sentence,
             'image' => fake()->image(),
             'summary' => fake()->sentence,
-            'body' => fake()->paragraph
+            'body' => fake()->paragraph,
+            'publication_date' => Carbon::today() // Set default publication date to today
         ];
     }
 }
