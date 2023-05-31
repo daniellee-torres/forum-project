@@ -18,6 +18,8 @@ class CreateArticleComponent extends Component
     public $summary;
     public $body;
     public $publication_date;
+    public $tempUrl;
+
     protected $rules = [
         'title' => 'required',
         'image' => 'nullable|image|mimes:jpeg,png,gif|max:10240',
@@ -42,12 +44,16 @@ class CreateArticleComponent extends Component
         Article::create([
             'user_id' => $this->user->id,
             'title' => $this->title,
-            'image' => $this->image ? $this->photo->store('photos','public') : null,
+            'image' => $this->image ? $this->image->store('photos','public') : null,
             'summary' => $this->summary,
             'body' => $this->body,
             'publication_date' => Carbon::parse($this->publication_date)
         ]);
+        return redirect('/my-articles');
+    }
 
+    public function cancel()
+    {
         return redirect('/my-articles');
     }
 }

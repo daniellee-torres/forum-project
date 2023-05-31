@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Facades\Livewire\GenerateSignedUploadUrl;
 use App\Http\Livewire\UserArticlesComponent;
 use App\Models\Article;
 use App\Models\Comment;
@@ -28,20 +27,18 @@ class SeeMyArticlesTest extends testcase
         Livewire::actingAs($user);
 
         // And the user has some articles
-        $publishedArticles = Article::factory()->count(3)->create(['user_id' => $user->id, 'publication_date' => Carbon::now()]);
-        $unpublishedArticles = Article::factory()->count(2)->create(['user_id' => $user->id, 'publication_date' => Carbon::tomorrow()]);
+        $publishedArticle = Article::factory()->create(['user_id' => $user->id, 'publication_date' => now()->subDays(3)]);
+        $unpublishedArticle = Article::factory()->create(['user_id' => $user->id, 'publication_date' => now()->addDays(3)]);
 
-        // When the user visits the "My Articles" page
-        $response = Livewire::test(UserArticlesComponent::class);
+        // When the user visits the "My Articles" page and clicks on published, then they should see the published article
+        Livewire::test(UserArticlesComponent::class)
+            ->call('reload_component', true)
+            ->assertSee($publishedArticle->title);
 
-        // Then the user should see their articles (both published and unpublished)
-        foreach ($publishedArticles as $article) {
-            $response->assertSee($article->title);
-        }
-
-        foreach ($unpublishedArticles as $article) {
-            $response->assertSee($article->title);
-        }
+        // When the user visits the "My Articles" page and clicks on unpublished, then they should see the unpublished article
+        Livewire::test(UserArticlesComponent::class)
+            ->call('reload_component', false)
+            ->assertSee($unpublishedArticle->title);
     }
 
 
