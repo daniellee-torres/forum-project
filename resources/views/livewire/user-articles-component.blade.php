@@ -97,7 +97,7 @@
                                                     </span>
                                                 </div>
                                                 <!-- Highlighted: "text-indigo-200", Not Highlighted: "text-gray-500" -->
-                                                <p class="text-gray-500 mt-2">This job posting can be viewed by anyone who has the link.</p>
+                                                <p class="text-gray-500 mt-2">This article is available publicly in the Blog Site.</p>
                                             </div>
                                         </li>
 
@@ -105,7 +105,7 @@
                                             <div class="flex flex-col">
                                                 <div class="flex justify-between">
                                                     <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-                                                    <p class="font-normal">Unpublished</p>
+                                                    <p class="font-normal">Edit</p>
                                                     <!--
                                                       Checkmark, only display for selected option.
 
@@ -118,7 +118,7 @@
                                                     </span>
                                                 </div>
                                                 <!-- Highlighted: "text-indigo-200", Not Highlighted: "text-gray-500" -->
-                                                <p class="text-gray-500 mt-2">This job posting can be viewed by anyone who has the link.</p>
+                                                <p class="text-gray-500 mt-2">Modify article details and change publication date</p>
                                             </div>
                                         </li>
 
