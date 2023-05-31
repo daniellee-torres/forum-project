@@ -14,24 +14,19 @@ class UserArticlesComponent extends Component
     public Collection $articles;
     public bool $published = true;
 
-    public function mount()
-    {
-        // Fetch the user's articles based on the selected status
-        $this->loadArticles();
-    }
-
     public function render()
     {
+        $this->loadArticles();
         return view('livewire.user-articles-component');
     }
 
-    public function reloadComponent(string $published)
+    public function reload_component(bool $published)
     {
-        $this->published = $published === '1';
-        $this->loadArticles();
+        $this->published = $published;
+        return redirect()->route('userArticles', ['published' => $this->published]);
     }
 
-    private function loadArticles()
+    public function loadArticles()
     {
         $query = Article::where('user_id', auth()->user()->id);
 
@@ -42,8 +37,8 @@ class UserArticlesComponent extends Component
             // Only load articles with publication date in the future
             $query->whereDate('publication_date', '>', Carbon::today());
         }
-
         $this->articles = $query->get();
+        //        $this->reset('articles');
     }
 
     public function add_article()

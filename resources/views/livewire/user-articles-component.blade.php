@@ -6,12 +6,14 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900">My Articles</h3>
             <div class="ml-auto sm:mt-0 flex ml-2">
                 <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-                <x-nav-link :href="route('userArticles', ['published' => true])" :active="request()->routeIs('userArticles') && request()->input('published') === '1'">
-                    Published
-                </x-nav-link>
-                <x-nav-link :href="route('userArticles', ['published' => false])" :active="request()->routeIs('userArticles') && request()->input('published') === '0'">
-                    Unpublished
-                </x-nav-link>
+{{--                <x-nav-link :href="route('userArticles', ['published' => true])" :active="request()->routeIs('userArticles') && request()->input('published') === '1'">--}}
+{{--                    Published--}}
+{{--                </x-nav-link>--}}
+{{--                <x-nav-link :href="route('userArticles', ['published' => false])" :active="request()->routeIs('userArticles') && request()->input('published') === '0'">--}}
+{{--                    Unpublished--}}
+{{--                </x-nav-link>--}}
+                    <button wire:click="reload_component(true)" class="p-2 text-sm hover:border-b hover:border-gray-800">Published</button>
+                    <button wire:click="reload_component(false)" class="p-2 text-sm hover:border-b hover:border-gray-800">Unpublished</button>
             </div>
             <button
                     wire:click="add_article"
@@ -21,12 +23,12 @@
 </div>
 
 <div class="max-w-7xl mx-auto">
-    @foreach ($this->articles as $article)
+    @foreach ($articles as $article)
         <div class="bg-white py-5 sm:px-6 p-4">
-            <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:shrink-0">
-                <img src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80" alt="" class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover">
-                <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
-            </div>
+{{--            <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:shrink-0">--}}
+{{--                <img src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80" alt="" class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover">--}}
+{{--                <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>--}}
+{{--            </div>--}}
 
             <div class="mt-6 ">
                 <div class="flex space-x-3">

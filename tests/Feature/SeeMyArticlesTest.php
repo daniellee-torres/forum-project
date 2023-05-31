@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Facades\Livewire\GenerateSignedUploadUrl;
 use App\Http\Livewire\UserArticlesComponent;
 use App\Models\Article;
 use App\Models\Comment;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Carbon;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -26,8 +28,8 @@ class SeeMyArticlesTest extends testcase
         Livewire::actingAs($user);
 
         // And the user has some articles
-        $publishedArticles = Article::factory()->count(3)->create(['user_id' => $user->id, 'published' => true]);
-        $unpublishedArticles = Article::factory()->count(2)->create(['user_id' => $user->id, 'published' => false]);
+        $publishedArticles = Article::factory()->count(3)->create(['user_id' => $user->id, 'publication_date' => Carbon::now()]);
+        $unpublishedArticles = Article::factory()->count(2)->create(['user_id' => $user->id, 'publication_date' => Carbon::tomorrow()]);
 
         // When the user visits the "My Articles" page
         $response = Livewire::test(UserArticlesComponent::class);
@@ -41,6 +43,7 @@ class SeeMyArticlesTest extends testcase
             $response->assertSee($article->title);
         }
     }
+
 
 
 
