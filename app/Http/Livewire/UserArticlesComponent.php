@@ -41,4 +41,9 @@ class UserArticlesComponent extends Component
             ->get();
     }
 
+    public function add_article()
+    {
+        return redirect()->route('createArticle');
+    }
+
 }

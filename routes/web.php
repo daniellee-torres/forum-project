@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\BlogComponent;
 use App\Http\Livewire\CommentFormComponent;
+use App\Http\Livewire\CreateArticleComponent;
 use App\Http\Livewire\FullArticleComponent;
 use App\Http\Livewire\ShowArticle;
 use App\Http\Livewire\ShowBlog;
@@ -25,8 +26,8 @@ Route::get('/', BlogComponent::class)->name('home');
 Route::get('/articles/{articleId}', FullArticleComponent::class)->name('article');
 Route::post('articles/{articleId}/comment', CommentFormComponent::class)->name('comment');
 
-
 Route::get('/my-articles', UserArticlesComponent::class)->middleware(['auth', 'verified'])->name('userArticles');
+Route::get('/my-articles/create', CreateArticleComponent::class)->middleware(['auth', 'verified'])->name('createArticle');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
