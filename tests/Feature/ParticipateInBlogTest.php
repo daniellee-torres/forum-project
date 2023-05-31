@@ -44,7 +44,7 @@ class ParticipateInBlogTest extends testcase
             'user_id' => $user->id,
             'body' => 'This is a test comment',
         ]);
-}
+    }
 
     /**
      * @test

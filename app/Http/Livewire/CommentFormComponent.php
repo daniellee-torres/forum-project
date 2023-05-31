@@ -27,7 +27,8 @@ class CommentFormComponent extends Component
 
         $this->comment = ''; // Reset the comment property to clear the text area
         $this->emit('commentPosted'); // Emit the "commentPosted" event
-        return back();
+
+        return redirect("/articles/{$this->articleId}");
     }
 
     public function refreshComments()
