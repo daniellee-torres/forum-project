@@ -15,8 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->string('image');
-            $table->string('summary');
+            $table->string('image')->nullable();
+            $table->string('summary')->nullable();
             $table->text('body');
             $table->date('publication_date');
             $table->timestamps();

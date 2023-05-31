@@ -6,12 +6,6 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900">My Articles</h3>
             <div class="ml-auto sm:mt-0 flex ml-2">
                 <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-{{--                <x-nav-link :href="route('userArticles', ['published' => true])" :active="request()->routeIs('userArticles') && request()->input('published') === '1'">--}}
-{{--                    Published--}}
-{{--                </x-nav-link>--}}
-{{--                <x-nav-link :href="route('userArticles', ['published' => false])" :active="request()->routeIs('userArticles') && request()->input('published') === '0'">--}}
-{{--                    Unpublished--}}
-{{--                </x-nav-link>--}}
                     <button wire:click="reload_component(true)" class="p-2 text-sm hover:border-b hover:border-gray-800">Published</button>
                     <button wire:click="reload_component(false)" class="p-2 text-sm hover:border-b hover:border-gray-800">Unpublished</button>
             </div>

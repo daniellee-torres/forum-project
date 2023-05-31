@@ -28,6 +28,7 @@ Route::post('articles/{articleId}/comment', CommentFormComponent::class)->name('
 
 Route::get('/my-articles', UserArticlesComponent::class)->middleware(['auth', 'verified'])->name('userArticles');
 Route::get('/my-articles/create', CreateArticleComponent::class)->middleware(['auth', 'verified'])->name('createArticle');
+Route::post('/my-articles/create', CreateArticleComponent::class)->middleware(['auth', 'verified'])->name('saveArticle');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
