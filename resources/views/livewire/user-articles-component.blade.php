@@ -6,18 +6,16 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900">My Articles</h3>
             <div class="ml-auto sm:mt-0 flex ml-2">
                 <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-                    <button wire:click="reload_component(true)" class="p-2 text-sm hover:border-b hover:border-gray-800">Published</button>
-                    <button wire:click="reload_component(false)" class="p-2 text-sm hover:border-b hover:border-gray-800">Unpublished</button>
+                    <button wire:click="reload_component(true)" class="p-2 text-sm hover:border-b hover:border-gray-800 {{ $published ? 'font-semibold' : '' }}">Published</button>
+                    <button wire:click="reload_component(false)" class="p-2 text-sm hover:border-b hover:border-gray-800 {{ !$published ? 'font-semibold' : '' }}">Unpublished</button>
             </div>
-            <button
-                    wire:click="add_article"
-                    class="ml-auto text-sm hover:bg-green-100 px-1 mr-2 bg-gray-50 rounded-lg">+ Add Article</button>
+            <a href="/my-articles/create" class="ml-auto text-sm hover:bg-green-100 px-1 mr-2 bg-gray-50 rounded-lg">+ Add Article</a>
         </div>
     </div>
 </div>
 
 <div class="max-w-7xl mx-auto">
-    @foreach ($this->articles as $article)
+    @forelse ($this->articles as $article)
         <div class="bg-white py-5 sm:px-6 p-4">
 {{--            <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:shrink-0">--}}
 {{--                <img src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80" alt="" class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover">--}}
@@ -134,6 +132,8 @@
                 </p>
             </div>
         </div>
-    @endforeach
+    @empty
+        <p class="flex justify-center p-6">No articles here yet, go and make some.</p>
+    @endforelse
 </div>
 </div>

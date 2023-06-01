@@ -50,9 +50,23 @@ class SeeMyArticlesTest extends testcase
         $response->assertRedirect('/login');
     }
 
+    /**
+     * @test
+     */
+    public function a_message_is_displayed_when_there_are_no_filtered_articles()
+    {
+        // Given we have a logged-in user
+        $user = User::factory()->create();
+        Livewire::actingAs($user);
 
+        // When the user visits the "My Articles" page and clicks on published, then they should see the message
+        Livewire::test(UserArticlesComponent::class)
+            ->call('reload_component', true)
+            ->assertSee('No articles here yet, go and make some.');
 
-
-
-
+        // When the user visits the "My Articles" page and clicks on unpublished, then they should see the message
+        Livewire::test(UserArticlesComponent::class)
+            ->call('reload_component', false)
+            ->assertSee('No articles here yet, go and make some.');
+    }
 }

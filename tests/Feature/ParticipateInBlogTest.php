@@ -59,7 +59,7 @@ class ParticipateInBlogTest extends testcase
         ]);
 
         // When a guest visits that article's comment page, they will be redirected back to the article page.
-        $response = $this->get(route('comment', ['articleId' => $article->id]))
+        $this->get(route('comment', ['articleId' => $article->id]))
             ->assertDontSeeLivewire('comment-form-component');
     }
 
