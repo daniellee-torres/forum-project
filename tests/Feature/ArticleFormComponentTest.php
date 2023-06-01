@@ -7,13 +7,10 @@ use App\Http\Livewire\CreateArticleComponent;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Carbon;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class CreateArticleTest extends TestCase
+class ArticleFormComponentTest extends TestCase
 {
 
     use DatabaseMigrations;
@@ -25,8 +22,8 @@ class CreateArticleTest extends TestCase
         //Given we have a signed in user
         $user = User::factory()->create();
 
-        //When we a user tries to create an article
-        //Then they are allowed to the create article page
+        //When a user tries to create an article
+        //Then they are allowed to the article form page
         //We should see the newly created article in the my articles page
         Livewire::actingAs($user)
             ->test(CreateArticleComponent::class, ['user' => $user])

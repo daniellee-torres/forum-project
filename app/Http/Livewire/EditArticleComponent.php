@@ -7,8 +7,11 @@ use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class CreateArticleComponent extends Component
+class EditArticleComponent extends Component
 {
+    public $article;
+
+
     use WithFileUploads;
     public $status;
     public $user;
@@ -32,12 +35,13 @@ class CreateArticleComponent extends Component
         $this->user = auth()->user();
     }
 
+
     public function render()
     {
-        return view('livewire.create-article-component');
+        return view('livewire.edit-article-component');
     }
 
-    public function save_article()
+    public function update_article()
     {
         $this->validate();
 

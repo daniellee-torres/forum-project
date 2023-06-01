@@ -1,7 +1,7 @@
 <div class="space-y-10 divide-y divide-gray-900/10">
      <div class="gap-y-8">
           <div class="px-4 sm:px-0">
-               <h2 class="text-base font-semibold leading-7 text-gray-900 p-4 pl-3 flex justify-center bg-gray-100">Create Article</h2>
+               <h2 class="text-base font-semibold leading-7 text-gray-900 p-4 pl-3 flex justify-center bg-gray-100">Article</h2>
           </div>
 
           <form wire:submit.prevent="save_article" method="POST" action="{{route('saveArticle')}}" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" enctype="multipart/form-data">
