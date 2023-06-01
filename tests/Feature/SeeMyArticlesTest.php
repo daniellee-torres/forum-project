@@ -41,6 +41,17 @@ class SeeMyArticlesTest extends testcase
             ->assertSee($unpublishedArticle->title);
     }
 
+    /**
+     * @test
+     */
+    public function a_guest_does_not_have_access_to_my_articles_page()
+    {
+        $response = $this->get('/my-articles');
+        $response->assertRedirect('/login');
+    }
+
+
+
 
 
 

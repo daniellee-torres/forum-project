@@ -50,6 +50,7 @@ class CreateArticleTest extends TestCase
      */
     public function a_guest_cannot_create_an_article()
     {
-        //TO DO
+        $response = $this->get('/my-articles/create');
+        $response->assertRedirect('/login');
     }
 }
