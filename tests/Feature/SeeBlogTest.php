@@ -18,14 +18,17 @@ class SeeBlogTest extends testcase
     /**
      * @test
      */
-    public function any_user_can_browse_all_articles()
+    public function any_user_can_browse_all_published_articles()
     {
-        //Given I made an Article
-        $article = Article::factory()->create();
-        // When I am at the main page, then I should see that article
-        $response = $this->get(route('home'))->assertSeeLivewire('blog-component', $article);
-        $response->assertSee($article->title)
-            ->assertSee($article->summary);
+        //Given I made a published and unpublished article
+        $publishedArticle = Article::factory()->create(['publication_date' => now()]);
+        $unpublishedArticle = Article::factory()->create(['publication_date' => now()->addDays(3)]);
+        // When I am at the main page, then I should see the published article
+        $response = $this->get(route('home'))->assertSeeLivewire('blog-component', $publishedArticle);
+        $response->assertSee($publishedArticle->title)
+            ->assertSee($publishedArticle->summary);
+        $response->assertDontSee($unpublishedArticle->title)
+        ->assertDontSee($unpublishedArticle->summary);
     }
 
     /**
